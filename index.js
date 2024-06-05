@@ -5,6 +5,7 @@ const User = require('./models/User');
 const Timezone = require('./models/Timezone');
 const dotenv = require('dotenv');
 const app = express();
+const scheduleJobs = require('./scheduler'); // Import scheduler
 
 app.use(bodyParser.json());
 dotenv.config();
@@ -13,6 +14,8 @@ dotenv.config();
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
+    await sequelize.sync(); // Sync all defined models to the DB.
+    scheduleJobs(); // Start the scheduler
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
