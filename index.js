@@ -5,7 +5,7 @@ const User = require('./models/User');
 const Timezone = require('./models/Timezone');
 const dotenv = require('dotenv');
 const app = express();
-const { scheduleDailyJobs, scheduleMinuteJobs } = require('./scheduler'); // Import scheduler
+const { scheduleDailyJobs, scheduleMinuteJobs } = require('./scheduler');
 
 app.use(bodyParser.json());
 dotenv.config();

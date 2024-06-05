@@ -19,6 +19,23 @@ async function updateUnlockedVideosForTimezone(timezoneId) {
   }
 }
 
+// Hàm để lập lịch công việc cho từng timezone mỗi ngày
+async function scheduleDailyJobs() {
+  try {
+    const timezones = await Timezone.findAll();
+    for (const timezone of timezones) {
+      const cronExpression = '0 0 * * *'; // Chạy vào 0 giờ hàng ngày
+      schedule.scheduleJob({ tz: timezone.name, rule: cronExpression }, () => {
+        console.log(`Running daily job for timezone ${timezone.name} at ${new Date().toLocaleString()}`);
+        updateUnlockedVideosForTimezone(timezone.id);
+      });
+      console.log(`Scheduled daily job for timezone ${timezone.name}`);
+    }
+  } catch (error) {
+    console.error('Error scheduling daily jobs:', error);
+  }
+}
+
 // Hàm để lập lịch công việc cho từng timezone mỗi phút (dùng để test)
 async function scheduleMinuteJobs() {
   try {
@@ -36,4 +53,4 @@ async function scheduleMinuteJobs() {
   }
 }
 
-module.exports = { scheduleMinuteJobs, updateUnlockedVideosForTimezone };
+module.exports = { scheduleDailyJobs, scheduleMinuteJobs, updateUnlockedVideosForTimezone };
