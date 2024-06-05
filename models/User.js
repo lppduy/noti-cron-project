@@ -24,15 +24,15 @@ const User = sequelize.define('User', {
   },
   timezoneId: {
     type: DataTypes.INTEGER,
-    field: 'timezone_id', // Tên cột trong cơ sở dữ liệu
+    field: 'timezone_id',
     references: {
-      model: 'timezones', // Tên bảng trong cơ sở dữ liệu
+      model: 'timezones',
       key: 'id'
     }
   }
 }, {
-  tableName: 'users', // Tên bảng
-  timestamps: true // Tự động tạo các trường createdAt và updatedAt
+  tableName: 'users',
+  timestamps: true
 });
 
 User.belongsTo(Timezone, { foreignKey: 'timezoneId' });
