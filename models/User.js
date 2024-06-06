@@ -12,6 +12,11 @@ const User = sequelize.define('User', {
     allowNull: false,
     unique: true
   },
+  phoneNumber: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    field: 'phone_number'
+  },
   unlockedVideo: {
     type: DataTypes.INTEGER,
     defaultValue: 1,

@@ -1,0 +1,11 @@
+# List available timezones
+sudo systemsetup -listtimezones
+
+# Check the current timezone
+sudo systemsetup -gettimezone
+
+sudo systemsetup -settimezone America/New_York
+
+sudo systemsetup -settimezone Asia/Tokyo
+
+sudo systemsetup -settimezone Europe/London
